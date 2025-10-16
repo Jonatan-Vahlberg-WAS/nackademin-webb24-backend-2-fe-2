@@ -1,13 +1,12 @@
 import UpdateCourse from "@/components/courses/UpdateCourse";
+import CourseService from "@/utils/courseService";
 import { notFound } from "next/navigation";
 
 export default async function UpdateCoursePage({params}: PageProps<"/courses/[id]/update">) {
     const { id } = await params
     try {
 
-      const baseUrl = process.env.BACKEND_BASE_URL
-      const url = `${baseUrl}/courses/${id}/`
-      const response = await fetch(url)
+      const response = await new CourseService().getCourse(id)
       
       if(!response.ok) {
         throw new Error("Course not found")

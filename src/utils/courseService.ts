@@ -8,10 +8,28 @@ class CourseService {
         this.courseUrl = `${this.baseUrl}/courses`
     }
 
-    //TODO: Add get list
-    //TODO: extra add pagination options
-    
-    //TODO: get single course
+    async getCourses(options: Partial<CourseListQuery> = {}) {
+       let url = `${this.courseUrl}/`
+       if(options.offset) {
+        url += `?offset=${options.offset}`
+       }
+        return await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }) 
+    }
+
+    async getCourse(id: number | string) {
+       let url = `${this.courseUrl}/${id}/`
+        return await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }) 
+    }
 
     async createCourse(courseData: Partial<Course>) {
         const url = `${this.courseUrl}/`
@@ -24,9 +42,26 @@ class CourseService {
       })
     }
 
-    //TODO: Update course
+    async updateCourse(id: number | string, courseData: Partial<Course>) {
+        const url = `${this.courseUrl}/${id}`
+        return await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(courseData)
+      })
+    }
 
-    //TODO: delete course
+    async deleteCourse(id: number | string) {
+        const url = `${this.courseUrl}/${id}`
+        return await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    }
 }
 
 export default CourseService
