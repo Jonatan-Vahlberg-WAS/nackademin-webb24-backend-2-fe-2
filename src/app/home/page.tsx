@@ -1,4 +1,5 @@
 import CourseList from "@/components/courses/CourseList";
+import NewCourseLink from "@/components/courses/NewCourseLink";
 import Pagination from "@/components/Pagination";
 import CourseService from "@/utils/courseService";
 import Link from "next/link";
@@ -18,9 +19,7 @@ export default async function Home({ searchParams}: {
       <h1 className="text-2xl font-bold">Kurser</h1>
       <CourseList courses={courses.data} />
       <Pagination list={courses} baseUrl="/home"/>
-      <Link href={"/courses/new"}>
-        Skapa ny Kurs
-      </Link>
+      <NewCourseLink/>
       {/* <CourseForm/> */}
     </div>
   );
