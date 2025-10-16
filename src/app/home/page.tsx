@@ -1,3 +1,4 @@
+import AuthForm from "@/components/auth/AuthForm";
 import CourseList from "@/components/courses/CourseList";
 import NewCourseLink from "@/components/courses/NewCourseLink";
 import Pagination from "@/components/Pagination";
@@ -16,6 +17,7 @@ export default async function Home({ searchParams}: {
 
   return (
     <div className="p-16">
+      <AuthForm/>
       <h1 className="text-2xl font-bold">Kurser</h1>
       <CourseList courses={courses.data} />
       <Pagination list={courses} baseUrl="/home"/>
