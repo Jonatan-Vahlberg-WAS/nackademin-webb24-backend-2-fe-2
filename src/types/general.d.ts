@@ -4,3 +4,9 @@ type PaginatedListResponse<T> = {
     offset: number;
     limit: number;
 };
+
+type Page = {
+  label: string;
+  href: string;
+  disabled: boolean;
+};
