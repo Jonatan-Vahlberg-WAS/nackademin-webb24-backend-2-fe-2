@@ -1,5 +1,6 @@
 "use client;"
 
+import { CourseProvider } from "@/contexts/course";
 import { UserProvider } from "@/contexts/user";
 import { PropsWithChildren } from "react";
 
@@ -7,7 +8,9 @@ import { PropsWithChildren } from "react";
 export function Providers({ children }: PropsWithChildren) {
     return (
         <UserProvider>
-            {children}
+            <CourseProvider>
+                {children}
+            </CourseProvider>
         </UserProvider>
     )
 }
