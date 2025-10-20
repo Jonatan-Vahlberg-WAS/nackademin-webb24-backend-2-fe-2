@@ -4,6 +4,7 @@ import CourseService from "@/utils/courseService"
 import { useRouter } from "next/navigation"
 import { createContext, PropsWithChildren, useContext } from "react"
 import { ToastContainer, toast } from 'react-toastify';
+import { useUser } from "./user";
 
 
 
@@ -23,8 +24,15 @@ const CourseContext = createContext(initialState)
 
 function CourseProvider({children}: PropsWithChildren) {
     const router = useRouter()
+    const user = useUser()
+
+    const isUserLoggedIn = user.user!!
 
     const createCourse: typeof initialState.actions.createCourse = async (courseData) => {
+    if(!isUserLoggedIn) {
+        toast("You have to be logged in to create a course", { type: "info" })
+        return
+    }    
     console.log("CREATE NEW COURSE", courseData)
     try {
       const response = await new CourseService().createCourse(courseData)
